@@ -32,6 +32,19 @@
         --glass-border: rgba(255, 255, 255, 0.95);
       }
 
+      /* Variabel untuk Dark Theme */
+      body.dark-theme {
+        --bg: #090d16;
+        --surface: rgba(15, 23, 42, 0.85);
+        --surface-solid: #0f172a;
+        --ink: #f8fafc;
+        --ink-soft: #94a3b8;
+        --line: rgba(51, 65, 85, 0.6);
+        --line-glow: rgba(99, 102, 241, 0.3);
+        --glass-bg: rgba(15, 23, 42, 0.8);
+        --glass-border: rgba(51, 65, 85, 0.95);
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -41,10 +54,12 @@
         scroll-padding-top: 84px;
       }
 
+      /* Perbaikan agar layar mobile tidak bisa digeser ke samping */
       html,
       body {
-        overflow-x: hidden;
-        overflow-y: auto;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
         height: auto;
       }
 
@@ -60,6 +75,26 @@
         /* Colored Futuristic Background Grid */
         background-image: linear-gradient(to right, rgba(79, 70, 229, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
         background-size: 36px 36px;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+
+      /* Transisi halus saat toggle tema */
+      .navbar,
+      .project-card,
+      .metric-card,
+      .contact-form-card,
+      .form-control,
+      .skill-pill,
+      .eyebrow-role,
+      .hero-stat-chip,
+      footer {
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
       h1,
@@ -81,12 +116,11 @@
 
       /* ---------- Nav ---------- */
       .navbar {
-        background: rgba(240, 244, 253, 0.82);
+        background: var(--surface);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid rgba(199, 210, 254, 0.8);
+        border-bottom: 1px solid var(--line);
         padding: 14px 0;
-        transition: all 0.3s ease;
       }
       .brand-mark {
         display: inline-flex;
@@ -144,15 +178,15 @@
       #home {
         padding-top: 170px;
         padding-bottom: 70px;
-        overflow-x: hidden;
       }
       #home::before {
         content: "";
         position: absolute;
         top: -5%;
-        left: 55%;
+        left: 50%;
         transform: translateX(-50%);
         width: 650px;
+        max-width: 100vw;
         height: 650px;
         background: radial-gradient(circle, rgba(79, 70, 229, 0.16) 0%, rgba(14, 165, 233, 0.12) 40%, rgba(244, 63, 94, 0.05) 70%, transparent 80%);
         filter: blur(70px);
@@ -171,8 +205,8 @@
         color: var(--primary);
         font-weight: 600;
         font-size: 0.88rem;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(79, 70, 229, 0.3);
+        background: var(--surface);
+        border: 1px solid var(--line);
         backdrop-filter: blur(8px);
         padding: 6px 16px;
         border-radius: 100px;
@@ -232,8 +266,8 @@
         border-radius: 12px;
         font-weight: 600;
         font-size: 0.95rem;
-        border: 1px solid rgba(79, 70, 229, 0.3);
-        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid var(--line);
+        background: var(--surface);
         backdrop-filter: blur(8px);
         transition: all 0.25s ease;
       }
@@ -270,7 +304,7 @@
         aspect-ratio: 1 / 1.05;
         object-fit: cover;
         border-radius: 26px;
-        border: 4px solid #ffffff;
+        border: 4px solid var(--surface-solid);
         box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
         display: block;
       }
@@ -278,9 +312,9 @@
         position: absolute;
         bottom: -18px;
         left: -18px;
-        background: rgba(255, 255, 255, 0.92);
+        background: var(--surface);
         backdrop-filter: blur(12px);
-        border: 1px solid rgba(79, 70, 229, 0.2);
+        border: 1px solid var(--line);
         border-radius: 16px;
         padding: 12px 18px;
         box-shadow: 0 16px 32px rgba(79, 70, 229, 0.15);
@@ -338,7 +372,7 @@
 
       /* ---------- About ---------- */
       #about {
-        background: rgba(255, 255, 255, 0.65);
+        background: var(--surface);
         backdrop-filter: blur(10px);
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
@@ -362,9 +396,9 @@
         font-weight: 600;
         padding: 8px 16px;
         border-radius: 100px;
-        border: 1px solid rgba(79, 70, 229, 0.2);
+        border: 1px solid var(--line);
         color: var(--primary);
-        background: rgba(79, 70, 229, 0.05);
+        background: rgba(79, 70, 229, 0.08);
         box-shadow: 0 2px 6px rgba(79, 70, 229, 0.04);
         transition: all 0.2s ease;
       }
@@ -377,11 +411,11 @@
       }
 
       .metric-card {
-        border: 1px solid rgba(79, 70, 229, 0.15);
+        border: 1px solid var(--line);
         border-radius: 20px;
         padding: 22px;
         height: 100%;
-        background: rgba(255, 255, 255, 0.85);
+        background: var(--surface-solid);
         backdrop-filter: blur(12px);
         box-shadow: 0 10px 25px rgba(79, 70, 229, 0.05);
         transition: all 0.25s ease;
@@ -416,7 +450,7 @@
 
       /* ---------- Projects ---------- */
       .project-card {
-        border: 1px solid rgba(79, 70, 229, 0.15);
+        border: 1px solid var(--line);
         border-radius: 22px;
         overflow: hidden;
         background: var(--surface-solid);
@@ -468,7 +502,7 @@
 
       /* ---------- Contact ---------- */
       #contact {
-        background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+        background: var(--bg);
         border-top: 1px solid var(--line);
         color: var(--ink);
       }
@@ -484,7 +518,7 @@
         height: 44px;
         border-radius: 12px;
         background: rgba(79, 70, 229, 0.1);
-        border: 1px solid rgba(79, 70, 229, 0.2);
+        border: 1px solid var(--line);
         display: grid;
         place-items: center;
         color: var(--primary);
@@ -507,9 +541,9 @@
       }
 
       .contact-form-card {
-        background: rgba(255, 255, 255, 0.9);
+        background: var(--surface-solid);
         backdrop-filter: blur(16px);
-        border: 1px solid rgba(79, 70, 229, 0.2);
+        border: 1px solid var(--line);
         border-radius: 24px;
         padding: 36px;
         box-shadow: 0 20px 40px rgba(79, 70, 229, 0.08);
@@ -520,15 +554,15 @@
         font-weight: 600;
       }
       .form-control {
-        background: rgba(240, 244, 253, 0.5);
-        border: 1px solid rgba(79, 70, 229, 0.2);
+        background: var(--bg);
+        border: 1px solid var(--line);
         border-radius: 10px;
         color: var(--ink);
         padding: 12px 14px;
         transition: all 0.2s ease;
       }
       .form-control:focus {
-        background: #fff;
+        background: var(--surface-solid);
         color: var(--ink);
         border-color: var(--primary);
         box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
@@ -574,6 +608,7 @@
         font-weight: 600;
       }
 
+      /* Penyesuaian Responsif Layar Kecil */
       @media (max-width: 767px) {
         section {
           padding: 80px 0 60px;
@@ -583,6 +618,10 @@
         }
         .hero-photo-wrap {
           margin-top: 50px;
+        }
+        .hero-stat-chip {
+          left: 0;
+          bottom: -10px;
         }
       }
 
@@ -608,11 +647,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto align-items-lg-center">
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <!-- Dark Mode Switcher -->
+            <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+              <button id="theme-toggle" class="btn btn-sm btn-outline-ghost rounded-pill px-3 py-2 d-flex align-items-center gap-2" aria-label="Toggle dark mode">
+                <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
+                <span class="d-lg-none">Ubah Tema</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -842,6 +888,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <!-- Script Active State Nav -->
     <script>
       const navLinks = document.querySelectorAll(".nav-link");
       navLinks.forEach((link) => {
@@ -852,6 +899,7 @@
       });
     </script>
 
+    <!-- Script Form Contact Google Sheets -->
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycbwKu3oV47Kq87Mrv4dhaOy6FihqQ7pNq6RkixNJtOqNQc7eeL8SDdVz-9XVW5lvLbW1sg/exec";
       const form = document.forms["ilham-contact-form"];
@@ -872,6 +920,31 @@
             console.log("Success!", response);
           })
           .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+
+    <!-- Script Dark Mode Switcher -->
+    <script>
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      const bodyElement = document.body;
+
+      const savedTheme = localStorage.getItem("portfolio_theme");
+      if (savedTheme === "dark") {
+        bodyElement.classList.add("dark-theme");
+        themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+      }
+
+      themeToggleBtn.addEventListener("click", () => {
+        bodyElement.classList.toggle("dark-theme");
+
+        if (bodyElement.classList.contains("dark-theme")) {
+          localStorage.setItem("portfolio_theme", "dark");
+          themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+        } else {
+          localStorage.setItem("portfolio_theme", "light");
+          themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+        }
       });
     </script>
   </body>
