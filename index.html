@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portofolio | Muhammad Ilham Arfhasyad</title>
 
-    <!-- Bootstrap (grid, collapse & icons only) -->
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
 
@@ -23,16 +23,15 @@
         --ink-soft: #334155;
         --line: rgba(199, 210, 254, 0.6);
         --line-glow: rgba(99, 102, 241, 0.4);
-        --primary: #4f46e5; /* Deep Indigo */
+        --primary: #4f46e5;
         --primary-deep: #4338ca;
-        --accent: #0ea5e9; /* Vivid Cyan */
-        --secondary-accent: #8b5cf6; /* Vibrant Purple */
-        --warm: #f43f5e; /* Vibrant Rose / Pink */
+        --accent: #0ea5e9;
+        --secondary-accent: #8b5cf6;
+        --warm: #f43f5e;
         --glass-bg: rgba(255, 255, 255, 0.8);
         --glass-border: rgba(255, 255, 255, 0.95);
       }
 
-      /* Variabel untuk Dark Theme */
       body.dark-theme {
         --bg: #090d16;
         --surface: rgba(15, 23, 42, 0.85);
@@ -54,7 +53,6 @@
         scroll-padding-top: 84px;
       }
 
-      /* Perbaikan agar layar mobile tidak bisa digeser ke samping */
       html,
       body {
         width: 100%;
@@ -72,7 +70,6 @@
           sans-serif;
         font-size: 16px;
         line-height: 1.65;
-        /* Colored Futuristic Background Grid */
         background-image: linear-gradient(to right, rgba(79, 70, 229, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
         background-size: 36px 36px;
         transition:
@@ -80,7 +77,6 @@
           color 0.3s ease;
       }
 
-      /* Transisi halus saat toggle tema */
       .navbar,
       .project-card,
       .metric-card,
@@ -121,6 +117,7 @@
         -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--line);
         padding: 14px 0;
+        z-index: 1030;
       }
       .brand-mark {
         display: inline-flex;
@@ -142,6 +139,23 @@
         background: linear-gradient(135deg, var(--primary), var(--warm));
         box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
       }
+
+      /* Style khusus tombol toggle mobile agar terlihat jelas di mode terang & gelap */
+      .navbar-toggler {
+        border: 1px solid var(--line) !important;
+        border-radius: 10px;
+        padding: 6px 12px;
+        color: var(--ink);
+        background: var(--surface-solid);
+        box-shadow: none !important;
+      }
+      .navbar-toggler-icon {
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       .navbar-nav .nav-link {
         color: var(--ink-soft) !important;
         font-weight: 500;
@@ -168,10 +182,6 @@
       .navbar-nav .nav-link.active::after,
       .navbar-nav .nav-link:hover::after {
         width: 100%;
-      }
-      .navbar-toggler {
-        border: none;
-        box-shadow: none !important;
       }
 
       /* ---------- Hero ---------- */
@@ -330,7 +340,7 @@
         color: var(--ink-soft);
       }
 
-      /* Entrance */
+      /* Entrance Animations */
       .reveal {
         opacity: 0;
         transform: translateY(14px);
@@ -355,7 +365,7 @@
         }
       }
 
-      /* ---------- Section heading ---------- */
+      /* ---------- Section Heading ---------- */
       .section-head {
         margin-bottom: 46px;
       }
@@ -608,7 +618,18 @@
         font-weight: 600;
       }
 
-      /* Penyesuaian Responsif Layar Kecil */
+      /* Media Query Mobile */
+      @media (max-width: 991px) {
+        .navbar-collapse {
+          background: var(--surface-solid);
+          border: 1px solid var(--line);
+          border-radius: 16px;
+          padding: 16px;
+          margin-top: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+      }
+
       @media (max-width: 767px) {
         section {
           padding: 80px 0 60px;
@@ -643,15 +664,19 @@
           <span class="badge-square">MIA</span>
           Muhammad Ilham Arfhasyad
         </a>
+
+        <!-- Tombol Toggler dengan Ikon Bootstrap yang Selalu Terlihat -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto align-items-lg-center">
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
             <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
             <!-- Dark Mode Switcher -->
             <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
               <button id="theme-toggle" class="btn btn-sm btn-outline-ghost rounded-pill px-3 py-2 d-flex align-items-center gap-2" aria-label="Toggle dark mode">
@@ -759,7 +784,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Proyek &amp; Pengalaman</h2>
-          <p>Beberapa pekerjaan teknis yang pernah saya tangani. Ganti gambar dan deskripsi berikut dengan detail proyek Anda sendiri.</p>
+          <p>Beberapa pekerjaan teknis yang pernah saya tangani.</p>
         </div>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4">
@@ -886,20 +911,29 @@
       <p class="mb-0">Dibuat oleh <a href="https://www.instagram.com/eihamm__/">Muhammad Ilham Arfhasyad</a></p>
     </footer>
 
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- Script Active State Nav -->
+    <!-- Script Nav Dynamic State & Auto Close Mobile Nav Saat Di-klik -->
     <script>
       const navLinks = document.querySelectorAll(".nav-link");
+      const navbarCollapse = document.getElementById("navbarNav");
+
       navLinks.forEach((link) => {
         link.addEventListener("click", function () {
           navLinks.forEach((item) => item.classList.remove("active"));
           this.classList.add("active");
+
+          // Tutup menu otomatis di layar mobile setelah klik menu
+          if (navbarCollapse.classList.contains("show")) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+            bsCollapse.hide();
+          }
         });
       });
     </script>
 
-    <!-- Script Form Contact Google Sheets -->
+    <!-- Script Google Sheets Contact Form -->
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycbwKu3oV47Kq87Mrv4dhaOy6FihqQ7pNq6RkixNJtOqNQc7eeL8SDdVz-9XVW5lvLbW1sg/exec";
       const form = document.forms["ilham-contact-form"];
