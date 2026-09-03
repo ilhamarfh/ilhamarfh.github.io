@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portofolio | Muhammad Ilham Arfhasyad</title>
 
-    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -75,6 +73,73 @@
         transition:
           background-color 0.3s ease,
           color 0.3s ease;
+        position: relative;
+      }
+
+      /* ---------- Scroll progress bar ---------- */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, var(--primary), var(--accent), var(--warm));
+        z-index: 2000;
+        transition: width 0.08s linear;
+        box-shadow: 0 0 10px rgba(79, 70, 229, 0.6);
+      }
+
+      /* ---------- Ambient floating blobs ---------- */
+      .ambient-blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.35;
+        z-index: 0;
+        pointer-events: none;
+        animation: float-blob 16s ease-in-out infinite;
+      }
+      .ambient-blob.b1 {
+        width: 420px;
+        height: 420px;
+        top: -120px;
+        left: -120px;
+        background: radial-gradient(circle, var(--primary), transparent 70%);
+        animation-delay: 0s;
+      }
+      .ambient-blob.b2 {
+        width: 380px;
+        height: 380px;
+        bottom: -100px;
+        right: -100px;
+        background: radial-gradient(circle, var(--accent), transparent 70%);
+        animation-delay: -6s;
+      }
+      .ambient-blob.b3 {
+        width: 320px;
+        height: 320px;
+        top: 45%;
+        left: 60%;
+        background: radial-gradient(circle, var(--warm), transparent 70%);
+        animation-delay: -10s;
+        opacity: 0.2;
+      }
+      @keyframes float-blob {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(30px, -40px) scale(1.08);
+        }
+        66% {
+          transform: translate(-25px, 25px) scale(0.95);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .ambient-blob {
+          animation: none;
+        }
       }
 
       .navbar,
@@ -107,7 +172,7 @@
 
       section {
         position: relative;
-        padding: 110px 0 90px;
+        padding: 80px 0 90px;
       }
 
       /* ---------- Nav ---------- */
@@ -118,6 +183,15 @@
         border-bottom: 1px solid var(--line);
         padding: 14px 0;
         z-index: 1030;
+        transition:
+          padding 0.3s ease,
+          box-shadow 0.3s ease,
+          background-color 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .navbar.scrolled {
+        padding: 8px 0;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
       }
       .brand-mark {
         display: inline-flex;
@@ -136,11 +210,26 @@
         color: #fff;
         font-weight: 700;
         font-size: 0.85rem;
-        background: linear-gradient(135deg, var(--primary), var(--warm));
+        background: linear-gradient(120deg, #4338ca, #6366f1, #a5b4fc, #4338ca);
+        background-size: 200% 200%;
+        animation: gradient-shift 5s ease infinite;
         box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35);
+        transition: transform 0.3s ease;
+      }
+      .brand-mark:hover .badge-square {
+        transform: rotate(-8deg) scale(1.08);
       }
 
-      /* Style khusus tombol toggle mobile agar terlihat jelas di mode terang & gelap */
+      @keyframes gradient-shift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
       .navbar-toggler {
         border: 1px solid var(--line) !important;
         border-radius: 10px;
@@ -186,7 +275,7 @@
 
       /* ---------- Hero ---------- */
       #home {
-        padding-top: 170px;
+        padding-top: calc(86px + 3rem);
         padding-bottom: 70px;
       }
       #home::before {
@@ -202,6 +291,18 @@
         filter: blur(70px);
         z-index: 0;
         pointer-events: none;
+        animation: pulse-glow 6s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          opacity: 0.85;
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.06);
+        }
       }
       #home .container {
         position: relative;
@@ -228,6 +329,18 @@
         border-radius: 50%;
         background: var(--warm);
         box-shadow: 0 0 10px var(--warm);
+        animation: dot-pulse 1.8s ease-in-out infinite;
+      }
+      @keyframes dot-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.4);
+          opacity: 0.6;
+        }
       }
 
       .hero-title {
@@ -238,10 +351,13 @@
         margin: 22px 0 18px;
       }
       .hero-title .hl {
-        background: linear-gradient(120deg, var(--primary), var(--secondary-accent), var(--warm));
+        background: linear-gradient(120deg, #4338ca, #6366f1, #a5b4fc, #4338ca);
+        background-size: 300% 300%;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        animation: gradient-shift 6s ease infinite;
+        display: inline-block;
       }
       .hero-lead {
         color: var(--ink-soft);
@@ -255,7 +371,9 @@
         flex-wrap: wrap;
       }
       .btn-primary-glow {
-        background: linear-gradient(135deg, var(--primary), var(--secondary-accent));
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(120deg, #4338ca, #4f46e5, #665cf6, #4338ca);
         color: #fff;
         padding: 13px 28px;
         border-radius: 12px;
@@ -271,6 +389,8 @@
         box-shadow: 0 12px 30px rgba(79, 70, 229, 0.5);
       }
       .btn-outline-ghost {
+        position: relative;
+        overflow: hidden;
         color: var(--primary);
         padding: 13px 28px;
         border-radius: 12px;
@@ -288,17 +408,41 @@
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
       }
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.55);
+        transform: scale(0);
+        animation: ripple-anim 0.6s ease-out;
+        pointer-events: none;
+      }
+      @keyframes ripple-anim {
+        to {
+          transform: scale(3.2);
+          opacity: 0;
+        }
+      }
 
       .hero-photo-wrap {
         position: relative;
         width: min(320px, 80%);
         margin: 0 auto;
+        animation: bob 5s ease-in-out infinite;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
       }
       .hero-photo-ring {
         position: absolute;
         inset: -14px;
         border-radius: 32px;
-        background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--secondary-accent), var(--warm), var(--primary));
+        background: conic-gradient(from 0deg, #4338ca, #6366f1, #a5b4fc, #4338ca);
         opacity: 0.9;
         filter: blur(8px);
         animation: spin 8s linear infinite;
@@ -340,7 +484,7 @@
         color: var(--ink-soft);
       }
 
-      /* Entrance Animations */
+      /* Entrance Animations (hero, on load) */
       .reveal {
         opacity: 0;
         transform: translateY(14px);
@@ -362,6 +506,41 @@
         to {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      /* ---------- Scroll-triggered reveal (rest of page) ---------- */
+      .sr {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform, opacity;
+      }
+      .sr.sr-left {
+        transform: translateX(-32px);
+      }
+      .sr.sr-right {
+        transform: translateX(32px);
+      }
+      .sr.sr-scale {
+        transform: scale(0.92);
+      }
+      .sr.is-visible {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sr {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .reveal {
+          animation: none;
+          opacity: 1;
+          transform: none;
         }
       }
 
@@ -416,7 +595,7 @@
         background: var(--primary);
         color: #fff;
         border-color: var(--primary);
-        transform: translateY(-2px);
+        transform: translateY(-2px) scale(1.04);
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
       }
 
@@ -431,7 +610,7 @@
         transition: all 0.25s ease;
       }
       .metric-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-6px) scale(1.02);
         border-color: var(--primary);
         box-shadow: 0 14px 30px rgba(79, 70, 229, 0.15);
       }
@@ -445,6 +624,10 @@
         margin-bottom: 14px;
         font-size: 1.1rem;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+        transition: transform 0.3s ease;
+      }
+      .metric-card:hover i {
+        transform: scale(1.12) rotate(-6deg);
       }
       .metric-card h3 {
         font-size: 1.5rem;
@@ -482,7 +665,7 @@
         transition: transform 0.5s ease;
       }
       .project-card:hover .thumb {
-        transform: scale(1.03);
+        transform: scale(1.06);
       }
       .project-card .body {
         padding: 22px 24px 26px;
@@ -497,6 +680,10 @@
         border-radius: 100px;
         margin-bottom: 12px;
         box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        transition: transform 0.25s ease;
+      }
+      .project-card:hover .project-tag {
+        transform: translateY(-2px);
       }
       .project-card h3 {
         font-size: 1.1rem;
@@ -522,6 +709,10 @@
         align-items: flex-start;
         gap: 16px;
         margin-bottom: 24px;
+        transition: transform 0.25s ease;
+      }
+      .contact-info-item:hover {
+        transform: translateX(6px);
       }
       .contact-info-item i {
         width: 44px;
@@ -534,6 +725,12 @@
         color: var(--primary);
         font-size: 1.1rem;
         flex-shrink: 0;
+        transition: all 0.25s ease;
+      }
+      .contact-info-item:hover i {
+        background: var(--primary);
+        color: #fff;
+        transform: rotate(-8deg) scale(1.08);
       }
       .contact-info-item strong {
         display: block;
@@ -576,12 +773,15 @@
         color: var(--ink);
         border-color: var(--primary);
         box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+        transform: translateY(-1px);
       }
       .form-control::placeholder {
         color: #94a3b8;
       }
 
       .btn-send {
+        position: relative;
+        overflow: hidden;
         background: linear-gradient(135deg, var(--primary), var(--secondary-accent));
         color: #fff;
         border: none;
@@ -604,6 +804,7 @@
         border: 1px solid rgba(14, 165, 233, 0.4);
         color: #0369a1;
         border-radius: 14px;
+        animation: rise 0.5s ease forwards;
       }
 
       footer {
@@ -612,10 +813,43 @@
         font-size: 0.85rem;
         padding: 24px 0 30px;
         border-top: 1px solid var(--line);
+        position: relative;
+        z-index: 1;
       }
       footer a {
         color: var(--primary);
         font-weight: 600;
+      }
+
+      /* ---------- Back to top ---------- */
+      #back-to-top {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: none;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary), var(--secondary-accent));
+        box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(16px) scale(0.9);
+        transition: all 0.3s ease;
+        z-index: 1500;
+        font-size: 1.1rem;
+      }
+      #back-to-top.show {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+      #back-to-top:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 14px 30px rgba(79, 70, 229, 0.45);
       }
 
       /* Media Query Mobile */
@@ -632,10 +866,10 @@
 
       @media (max-width: 767px) {
         section {
-          padding: 80px 0 60px;
+          padding: 60px 0 60px;
         }
         #home {
-          padding-top: 140px;
+          padding-top: calc(70px + 5rem);
         }
         .hero-photo-wrap {
           margin-top: 50px;
@@ -644,11 +878,21 @@
           left: 0;
           bottom: -10px;
         }
+        #back-to-top {
+          right: 16px;
+          bottom: 16px;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
         .reveal,
-        .hero-photo-ring {
+        .hero-photo-ring,
+        .hero-photo-wrap,
+        .ambient-blob,
+        #home::before,
+        .eyebrow-role .dot,
+        .hero-title .hl,
+        .brand-mark .badge-square {
           animation: none;
           opacity: 1;
           transform: none;
@@ -657,7 +901,11 @@
     </style>
   </head>
   <body id="home">
-    <!-- Navbar -->
+    <div id="scroll-progress"></div>
+    <div class="ambient-blob b1"></div>
+    <div class="ambient-blob b2"></div>
+    <div class="ambient-blob b3"></div>
+
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
         <a class="brand-mark" href="#home">
@@ -665,7 +913,6 @@
           Muhammad Ilham Arfhasyad
         </a>
 
-        <!-- Tombol Toggler dengan Ikon Bootstrap yang Selalu Terlihat -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"><i class="bi bi-list"></i></span>
         </button>
@@ -677,7 +924,6 @@
             <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
             <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 
-            <!-- Dark Mode Switcher -->
             <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
               <button id="theme-toggle" class="btn btn-sm btn-outline-ghost rounded-pill px-3 py-2 d-flex align-items-center gap-2" aria-label="Toggle dark mode">
                 <i id="theme-icon" class="bi bi-moon-stars-fill"></i>
@@ -689,7 +935,6 @@
       </div>
     </nav>
 
-    <!-- Hero -->
     <section id="home">
       <div class="container">
         <div class="row align-items-center g-5">
@@ -701,8 +946,8 @@
             </h1>
             <p class="hero-lead reveal reveal-3">Lulusan Teknik Komputer &amp; Jaringan yang fokus menjaga jaringan tetap stabil, cepat belajar, dan senang menyelesaikan masalah teknis dari akar penyebabnya.</p>
             <div class="hero-cta reveal reveal-4">
-              <a href="#projects" class="btn-primary-glow">Lihat Proyek</a>
-              <a href="#contact" class="btn-outline-ghost">Hubungi Saya</a>
+              <a href="#projects" class="btn-primary-glow btn-ripple">Lihat Proyek</a>
+              <a href="#contact" class="btn-outline-ghost btn-ripple">Hubungi Saya</a>
             </div>
           </div>
           <div class="col-lg-6">
@@ -719,15 +964,14 @@
       </div>
     </section>
 
-    <!-- About -->
     <section id="about">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head sr">
           <h2>Tentang Ilham</h2>
           <p>Latar belakang, pengalaman, dan keterampilan teknis yang saya bawa ke setiap pekerjaan.</p>
         </div>
         <div class="row g-5 align-items-start">
-          <div class="col-lg-7 about-copy">
+          <div class="col-lg-7 about-copy sr sr-left">
             <p>
               Lulusan SMK Tinta Emas Indonesia jurusan Teknik Komputer &amp; Jaringan (TKJ) yang berdedikasi. Memiliki pengalaman kerja praktek selama 4 bulan sebagai bagian Keuangan &amp; Informasi Teknologi (IT) di PT Duta Lintas Nusa.
             </p>
@@ -743,7 +987,7 @@
               <span class="skill-pill">IT Support</span>
             </div>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-5 sr sr-right">
             <div class="row g-3">
               <div class="col-6">
                 <div class="metric-card">
@@ -779,16 +1023,15 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head sr">
           <h2>Proyek &amp; Pengalaman</h2>
           <p>Beberapa pekerjaan teknis yang pernah saya tangani.</p>
         </div>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4">
-            <div class="project-card">
+            <div class="project-card sr sr-scale">
               <img src="img/WhatsApp Image 2026-09-02 at 22.22.15.jpeg" class="thumb" alt="Monitoring Jaringan NOC" />
               <div class="body">
                 <span class="project-tag">NOC</span>
@@ -798,7 +1041,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="project-card">
+            <div class="project-card sr sr-scale">
               <img src="img/WhatsApp Image 2026-09-02 at 22.24.57.jpg" class="thumb" alt="Konfigurasi Router dan OLT" />
               <div class="body">
                 <span class="project-tag">Jaringan</span>
@@ -808,7 +1051,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="project-card">
+            <div class="project-card sr sr-scale">
               <img src="img/WhatsApp Image 2026-09-02 at 22.39.41.jpeg" class="thumb" alt="Instalasi Jaringan LAN" />
               <div class="body">
                 <span class="project-tag">Instalasi</span>
@@ -818,7 +1061,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="project-card">
+            <div class="project-card sr sr-scale">
               <img src="img/WhatsApp Image 2026-09-02 at 22.27.26.jpeg" class="thumb" alt="Maintenance Sistem Komputer" />
               <div class="body">
                 <span class="project-tag">Maintenance</span>
@@ -828,7 +1071,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="project-card">
+            <div class="project-card sr sr-scale">
               <img src="img/WhatsApp Image 2026-09-02 at 22.36.52.jpg" class="thumb" alt="Dukungan IT Keuangan" />
               <div class="body">
                 <span class="project-tag">IT Support</span>
@@ -841,15 +1084,14 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head sr">
           <h2>Hubungi Ilham</h2>
           <p>Ada peluang kerja, kerja praktek, atau proyek jaringan yang bisa saya bantu? Kirim pesan di bawah ini.</p>
         </div>
         <div class="row g-5">
-          <div class="col-lg-5">
+          <div class="col-lg-5 sr sr-left">
             <div class="contact-info-item">
               <i class="bi bi-geo-alt"></i>
               <div>
@@ -861,7 +1103,7 @@
               <i class="bi bi-mortarboard"></i>
               <div>
                 <strong>Pendidikan</strong>
-                <span>SMK Tinta Emas Indonesia — TKJ</span>
+                <span><a href="https://www.instagram.com/smk_yatindo/">SMK Tinta Emas Indonesia — TKJ</a></span>
               </div>
             </div>
             <div class="contact-info-item">
@@ -872,7 +1114,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-7">
+          <div class="col-lg-7 sr sr-right">
             <div class="alert my-alert alert-dismissible fade show d-none" role="alert">
               <strong>Terimakasih!</strong> Pesan anda sudah terkirim.
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -894,7 +1136,7 @@
                   </div>
                 </div>
 
-                <button type="submit" class="btn-send btn-kirim">Kirim Pesan</button>
+                <button type="submit" class="btn-send btn-kirim btn-ripple">Kirim Pesan</button>
                 <button class="btn-send btn-loading d-none" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   Mengirim...
@@ -906,15 +1148,14 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="text-center">
       <p class="mb-0">Dibuat oleh <a href="https://www.instagram.com/eihamm__/">Muhammad Ilham Arfhasyad</a></p>
     </footer>
 
-    <!-- Bootstrap Bundle JS -->
+    <button id="back-to-top" aria-label="Kembali ke atas"><i class="bi bi-arrow-up"></i></button>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- Script Nav Dynamic State & Auto Close Mobile Nav Saat Di-klik -->
     <script>
       const navLinks = document.querySelectorAll(".nav-link");
       const navbarCollapse = document.getElementById("navbarNav");
@@ -933,7 +1174,6 @@
       });
     </script>
 
-    <!-- Script Google Sheets Contact Form -->
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycbwKu3oV47Kq87Mrv4dhaOy6FihqQ7pNq6RkixNJtOqNQc7eeL8SDdVz-9XVW5lvLbW1sg/exec";
       const form = document.forms["ilham-contact-form"];
@@ -957,7 +1197,6 @@
       });
     </script>
 
-    <!-- Script Dark Mode Switcher -->
     <script>
       const themeToggleBtn = document.getElementById("theme-toggle");
       const themeIcon = document.getElementById("theme-icon");
@@ -973,12 +1212,106 @@
         bodyElement.classList.toggle("dark-theme");
 
         if (bodyElement.classList.contains("dark-theme")) {
-          localStorage.setItem("portfolio_theme", "dark");
           themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+          localStorage.setItem("portfolio_theme", "dark");
         } else {
-          localStorage.setItem("portfolio_theme", "light");
           themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+          localStorage.setItem("portfolio_theme", "light");
         }
+      });
+    </script>
+
+    <!-- ===== Animasi tambahan agar halaman terasa hidup ===== -->
+    <script>
+      // 1) Scroll progress bar
+      const progressBar = document.getElementById("scroll-progress");
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = pct + "%";
+      }
+
+      // 2) Navbar mengecil saat discroll
+      const navbarEl = document.querySelector(".navbar");
+      function updateNavbar() {
+        if (window.scrollY > 40) {
+          navbarEl.classList.add("scrolled");
+        } else {
+          navbarEl.classList.remove("scrolled");
+        }
+      }
+
+      // 3) Tombol "kembali ke atas"
+      const backToTopBtn = document.getElementById("back-to-top");
+      function updateBackToTop() {
+        if (window.scrollY > 500) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      }
+      backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          updateProgress();
+          updateNavbar();
+          updateBackToTop();
+        },
+        { passive: true },
+      );
+      updateProgress();
+      updateNavbar();
+      updateBackToTop();
+
+      // 4) Reveal elemen saat masuk viewport (IntersectionObserver)
+      const srItems = document.querySelectorAll(".sr");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, idx) => {
+              if (entry.isIntersecting) {
+                const delay = (entry.target.dataset.staggerIndex || 0) * 90;
+                setTimeout(() => entry.target.classList.add("is-visible"), delay);
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+        );
+
+        // Beri delay bertahap untuk kartu-kartu yang muncul berurutan dalam grup yang sama
+        const groups = {};
+        srItems.forEach((el) => {
+          const parent = el.closest(".row");
+          const key = parent ? Array.from(document.querySelectorAll(".row")).indexOf(parent) : "solo";
+          groups[key] = groups[key] || 0;
+          el.dataset.staggerIndex = groups[key];
+          groups[key] += 1;
+          io.observe(el);
+        });
+      } else {
+        // Fallback: langsung tampilkan jika browser tidak mendukung
+        srItems.forEach((el) => el.classList.add("is-visible"));
+      }
+
+      // 5) Efek ripple pada tombol saat diklik
+      document.querySelectorAll(".btn-ripple").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement("span");
+          const size = Math.max(rect.width, rect.height);
+          ripple.className = "ripple";
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = e.clientX - rect.left - size / 2 + "px";
+          ripple.style.top = e.clientY - rect.top - size / 2 + "px";
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 650);
+        });
       });
     </script>
   </body>
