@@ -1195,6 +1195,20 @@
           })
           .catch((error) => console.error("Error!", error.message));
       });
+
+      // Kirim form dengan menekan tombol Enter di keyboard (tanpa harus klik tombol Kirim Pesan)
+      form.querySelectorAll("input, textarea").forEach((field) => {
+        field.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            if (typeof form.requestSubmit === "function") {
+              form.requestSubmit();
+            } else {
+              form.dispatchEvent(new Event("submit", { cancelable: true }));
+            }
+          }
+        });
+      });
     </script>
 
     <script>
