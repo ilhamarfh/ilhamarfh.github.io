@@ -1726,6 +1726,17 @@ section {
 .contact .contact-card p {
   color: rgba(255, 255, 255, 0.72);
 }
+.contact .contact-card p a {
+  color: var(--primary-light);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.contact .contact-card p a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
 .contact .contact-form {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
