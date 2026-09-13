@@ -371,8 +371,9 @@ messageField.addEventListener("keydown", (e) => {
       canvas.width = clientWidth;
       canvas.height = clientHeight;
 
+      const mobile = clientWidth < 768;
       const count = Math.min(
-        70,
+        mobile ? 34 : 70,
         Math.floor((clientWidth * clientHeight) / 22000),
       );
 
@@ -388,6 +389,9 @@ messageField.addEventListener("keydown", (e) => {
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      const mobile = canvas.width < 768;
+      const linkDist = mobile ? 80 : 130;
+
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
@@ -402,8 +406,8 @@ messageField.addEventListener("keydown", (e) => {
           const q = particles[j];
           const dist = Math.hypot(p.x - q.x, p.y - q.y);
 
-          if (dist < 130) {
-            ctx.strokeStyle = `rgba(129, 140, 248, ${0.22 * (1 - dist / 130)})`;
+          if (dist < linkDist) {
+            ctx.strokeStyle = `rgba(129, 140, 248, ${0.22 * (1 - dist / linkDist)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
@@ -468,8 +472,17 @@ function hidePreloader() {
   document.body.classList.add("loaded");
 }
 
-window.addEventListener("load", () => setTimeout(hidePreloader, 900));
-setTimeout(hidePreloader, 4500);
+// Jangan tunggu semua gambar (window.load) — langsungkan begitu HTML siap
+// agar di koneksi lambat tidak terasa "memuat lama".
+const preStart = performance.now();
+
+window.addEventListener("DOMContentLoaded", () => {
+  const elapsed = performance.now() - preStart;
+  const minShow = 500;
+  setTimeout(hidePreloader, Math.max(0, minShow - elapsed));
+});
+
+setTimeout(hidePreloader, 3000);
 
 // ===== Scroll Progress Bar =====
 const scrollProgress = document.getElementById("scrollProgress");
@@ -634,14 +647,14 @@ document.querySelectorAll(".btn").forEach((btn) => {
     });
 
     if (heroWrap) {
-      heroWrap.style.translate = `${(-cx * 26).toFixed(1)}px ${(-cy * 20).toFixed(
-        1,
-      )}px`;
+      heroWrap.style.translate = `${(-cx * 26).toFixed(1)}px ${(
+        -cy * 20
+      ).toFixed(1)}px`;
     }
     if (heroShape) {
-      heroShape.style.translate = `${(cx * 16).toFixed(1)}px ${(cy * 12).toFixed(
-        1,
-      )}px`;
+      heroShape.style.translate = `${(cx * 16).toFixed(1)}px ${(
+        cy * 12
+      ).toFixed(1)}px`;
     }
 
     requestAnimationFrame(parallaxLoop);
