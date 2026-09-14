@@ -258,7 +258,7 @@ backToTop.addEventListener("click", () => {
 // Ganti URL di bawah dengan hasil "Deploy > New deployment > Web app"
 // Petunjuk lengkap ada di file GOOGLE_SHEET_SETUP.txt
 const GAS_WEBAPP_URL =
-  "https://script.google.com/macros/s/AKfycbzw1g_Q3C2N35d1Xzs5HYktc6rc6DgDN-67AwXRQuE3L0fLGyyiLsn0Vh7NNDgQ3vHn-Q/exec";
+  "https://script.google.com/macros/s/AKfycbx8Yzf4KY7Ewkq2TlGsVmdagpEz8rkdkOkEQX7RTdhKs7A9XpDkTKUv185yhqkbN02p/exec";
 
 const contactForm = document.getElementById("contactForm");
 
@@ -270,7 +270,6 @@ contactForm.addEventListener("submit", async (e) => {
 
   const payload = {
     name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
     subject: document.getElementById("subject").value,
     message: document.getElementById("message").value,
   };
